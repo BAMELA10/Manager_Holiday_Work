@@ -1,0 +1,21 @@
+{% extends 'layout.html' %} {% block content %}
+
+<div class="container">
+    <div class="rowm-auto mt-5">
+        <form class="form-group " method="POST">
+            <p>Are you sure to want delete this element</p>
+            {% csrf_token %}
+            <div class="row col-6">
+                <a name="" id="" class="btn-md btn btn-primary m-auto col-5 mb-3" href="{{request.META.HTTP_REFERER}}" role="button">No</a>
+                <button type="submit" class="btn-md btn btn-danger m-auto col-5 mb-3">
+                    Yes
+                </button>
+
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+{% endblock content %}

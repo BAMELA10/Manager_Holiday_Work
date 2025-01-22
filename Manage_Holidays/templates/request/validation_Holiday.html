@@ -1,0 +1,40 @@
+{% extends 'layout.html' %} {% block content %}
+
+<header class="py-5">
+    <div class="container px-lg-5 mt-5">
+        <div class="p-4 p-lg-5 bg-light rounded-3 text-center mb-5 shadow-lg">
+            <div class="m-4 m-lg-5">
+                <h1>Details of request holiday of {{request_holiday.empolyee.first_name}} {{request_holiday.empolyee.last_name }} </h1>
+            </div>
+            <div class="m-4 m-lg-5">
+                <h2 class="fs-2 fw-bold">From {{ request_holiday.departure_date|date:"d/m/y"}} to {{ request_holiday.return_date|date:"d/m/y"}}</h2>
+                <p class="fs-2 fw-bold">For holiday from {{ request_holiday.holiday.start_date|date:"d/m/y"}} to {{ request_holiday.holiday.end_date|date:"d/m/y"}}</p>
+            </div>
+
+        </div>
+    </div>
+</header>
+
+<div class="container px-lg-5 mt-5">
+    <h1> Choose the decision for this request of holiday</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="" class="form-label">Decision</label> {{ form }}
+        </div>
+        <div class="text-center mb-3">
+            <button type="submit" class="btn-lg btn btn-primary mb-3 mt-4 col-lg-3 rounded-0">
+                Submit
+            </button>
+
+            <a name="" id="" class="btn-lg btn btn-dark  mb-3 mt-4 col-lg-3 rounded-0" href="{{request.META.HTTP_REFERER}}" role="button">Cancel</a>
+        </div>
+
+
+    </form>
+</div>
+
+
+
+
+{% endblock content %}

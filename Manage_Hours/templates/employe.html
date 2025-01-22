@@ -1,0 +1,106 @@
+{% extends 'layout.html' %} {% block content %} {% load static %}
+<div class="container">
+    <div class="row justify-content-between align-items-center g-2">
+        <div class="col-md-4 col-xxl-4 text-center">
+            <img src="{% static 'image/Corporate-with-background@2x-768x768.png' %}" alt="">
+        </div>
+        <div class="col-md-4 col-xxl-4 justify-content-around text-center">
+            <h1 class="display-2 mt-4 mb-3 text-center text-primary fw-bold">Planning of Workers</h1>
+            <p class="fs-3 mt-4 mb-3 text-center text-primary">Here it is possible for those who are authorized to consult and define a working schedule for all employees.</p>
+        </div>
+    </div>
+
+    <div class="row justify-content-between align-items-center g-2">
+
+        <div class="col-md-4 col-xxl-4 justify-content-around text-center">
+            <h1 class="display-2 mt-4 mb-3 text-center text-primary fw-bold">Personnal Planning</h1>
+            <p class="fs-2 mt-4 mb-3 text-center text-primary">Here it is possible to consult your personal working hours schedule.</p>
+            <a class="btn btn-outline-primary fs-5 rounded-0" href="{% url 'Manage_Hours:get_all_hours_for_current_user' %}">My working time</a>
+        </div>
+        <div class="col-md-4 col-xxl-4 text-center">
+            <img src="{% static 'image/9815679.png' %}" alt="">
+        </div>
+    </div>
+
+    <div class="row justify-content-around g-2 mt-3">
+        <div class="col-md-4 col-xxl-4 justify-content-around text-center">
+            <h1 class="display-3 mt-2 mb-2 text-primary fw-bold">Every Workers</h1>
+        </div>
+    </div>
+
+    <div class="row justify-content-between align-items-center g-2">
+
+
+        <div class="col-md-4 col-xxl-4">
+            <a type="button" class="btn btn-primary rounded-0 w-50 " href="{% url 'Manage_Hours:add_plan_hours' %}">
+                Add Time
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                  </svg>
+            </a>
+        </div>
+
+
+        <div class="col-md-4">
+            <form class="form-group mt-5 mb-5" method="GET" action="{% url 'Manage_Hours:Find employe' %}">
+                <div class="row justify-content-end">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control rounded-0 fs-5" name="find_input" placeholder="Search">{% csrf_token %}
+                        <a class="btn btn-danger bg-danger fs-5" href="{% url 'Manage_Hours:Employe' %}"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                            </svg></a>
+                        <button name="submit" id="" class="btn btn-primary  fs-5 rounded-0" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                            </svg></button>
+
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+    <div class="row justify-content-center align-items-center g-2 mt-4 mb-3">
+        <div class="table-responsive-sm table-responsive-xxl table-responsive-md">
+            <table class=" table align-middle table-hover  mt-4 mb-4">
+                <thead class=" table-dark ">
+                    <tr>
+                        <th scope="col" class="fs-3">First name</th>
+                        <th scope="col" class="fs-3">Last name</th>
+                        <th scope="col" class="fs-3">Email</th>
+                        <th scope="col" class="fs-3">Service</th>
+                        <th scope="col" class="fs-3">Date joined</th>
+                        <th scope="col" class="fs-3">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for items in all_employe %}
+                    <tr class="">
+                        <td scope="row" class="fs-3">{{items.first_name}} </td>
+                        <td scope="row" class="fs-3">{{items.last_name}} </td>
+                        <td scope="row" class="fs-3">{{items.email}} </td>
+                        <td scope="row" class="fs-3">{{items.service}} </td>
+                        <td scope="row" class="fs-3">{{items.date_joined|date:"d/m/y"}} </td>
+                        <td scope="row" class="fs-3">
+                            <a name="" id="" class="btn btn-primary rounded-0" href="{% url 'Manage_Hours:get_plan_hours' items.id %}" role="button">Current Time</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+{% endblock content %}

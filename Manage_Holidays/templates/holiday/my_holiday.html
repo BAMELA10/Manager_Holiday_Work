@@ -1,0 +1,69 @@
+{% extends 'layout.html' %} {% block content %} {% load static %}
+<header class="py-5">
+    <div class="container px-lg-5 mt-5">
+        <div class="p-4 p-lg-5 bg-light rounded-3 text-center mb-5 shadow-lg">
+            <div class="m-4 m-lg-5">
+                <img src="{% static 'image/OIP (4).jpg' %}" alt="" srcset="">
+            </div>
+            <div class="m-4 m-lg-5">
+                <h1 class="display-3 fw-bold">View yours leaves!</h1>
+                <p class="fs-4">Welcome to consultation of your leave, your one-stop shop to find out everything about your days of rest and your vacations.</p>
+            </div>
+
+        </div>
+    </div>
+</header>
+
+<div class="container mt-3">
+    <a type="button" class="btn btn-primary rounded-0 w-25" href="{% url 'Manage_Holidays:add_holiday' %}">
+        Add Holiday
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+          </svg>
+    </a>
+
+
+    <div class="row justify-content-center align-items-center g-2 mt-4 mb-3">
+        <div class="table-responsive-sm table-responsive-xxl table-responsive-md">
+            <table class=" table align-middle table-hover  mt-4 mb-4">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col" class="fs-3">Code</th>
+                        <th scope="col" class="fs-3">Start date</th>
+                        <th scope="col" class="fs-3">End date</th>
+                        <th scope="col" class="fs-3">Beneficiary</th>
+                        <th scope="col" class="fs-3">Status</th>
+                        {% if request.path == '/Manage_Holidays/reported_holidays/' %}
+                        <th scope="col" class="fs-3">Action</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for items in holidays %}
+                    <tr class="">
+                        <td scope="row" class="fs-3">{{items.code}} </td>
+                        <td scope="row" class="fs-3">{{items.start_date|date:"d/m/y"}} </td>
+                        <td scope="row" class="fs-3">{{items.end_date|date:"d/m/y"}} </td>
+                        <td scope="row" class="fs-3">{{items.beneficiary}} </td>
+                        <td scope="row" class="fs-3">{{items.status}} </td>
+                        {% if request.path == '/Manage_Holidays/reported_holidays/' %}
+                        <td scope="row" class="fs-3">
+
+                            <a name="" id="" class="btn btn-link p-0" href="{% url 'Manage_Holidays:plan_reported_holiday' items.id %}" role="button" title="Details"><span class="text-500 fas fa-edit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-zoom-in" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                                <path d="M10.344 11.742c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1 6.538 6.538 0 0 1-1.398 1.4z"/>
+                                <path fill-rule="evenodd" d="M6.5 3a.5.5 0 0 1 .5.5V6h2.5a.5.5 0 0 1 0 1H7v2.5a.5.5 0 0 1-1 0V7H3.5a.5.5 0 0 1 0-1H6V3.5a.5.5 0 0 1 .5-.5z"/>
+                              </svg></span></a>
+                        </td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
