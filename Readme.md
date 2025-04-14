@@ -9,6 +9,6 @@ Dans ce Projet on aura les applications suivantes :
 
 ### Link of Web Application : https://jordan10.pythonanywhere.com/
 
-###Credentials for login :
-# username : jordan10@mail.com
-# password : 12345
+# Credentials for login :
+### username : jordan10@mail.com
+### password : 12345
